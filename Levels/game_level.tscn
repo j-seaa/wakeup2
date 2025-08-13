@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://delnqpwlp1gc8"]
+[gd_scene load_steps=25 format=4 uid="uid://delnqpwlp1gc8"]
 
 [ext_resource type="PackedScene" uid="uid://ckkme7t7mhw4a" path="res://Character/Player.tscn" id="1_up8ek"]
 [ext_resource type="Texture2D" uid="uid://cuw58lo511mi0" path="res://assets/Pixel Art Top Down - Basic v1.2.1/Texture/TX Props.png" id="3_afl82"]
@@ -10,6 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://nxrmkjn8nf4r" path="res://assets/Pixel Art Top Down - Basic v1.2.1/Texture/TX Tileset Stone Ground.png" id="5_ekbqq"]
 [ext_resource type="Texture2D" uid="uid://bus1rqbs8fl4x" path="res://assets/Pixel Art Top Down - Basic v1.2.1/Texture/TX Tileset Wall.png" id="6_34xkg"]
 [ext_resource type="Texture2D" uid="uid://cai1b52bbc4mx" path="res://assets/Pixel Art Top Down - Basic v1.2.1/Texture/TX Plant.png" id="7_xk4lf"]
+[ext_resource type="FontFile" uid="uid://ccex1phijuyqf" path="res://assets/font/VCR_OSD_MONO_1.001.ttf" id="11_nxa8a"]
+
+[sub_resource type="PackedScene" id="PackedScene_3ty5n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_34xkg"]
 texture = ExtResource("3_wownj")
@@ -4340,11 +4343,21 @@ sources/10 = SubResource("TileSetAtlasSource_3ty5n")
 sources/11 = SubResource("TileSetAtlasSource_nxa8a")
 sources/12 = SubResource("TileSetAtlasSource_bskef")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nxa8a"]
+size = Vector2(20, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bskef"]
+size = Vector2(24, 48)
+
 [node name="GameLevel" type="Node2D"]
 y_sort_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_up8ek")]
+[node name="Player" parent="." node_paths=PackedStringArray("dialogue_label", "table_area", "bed_area") instance=ExtResource("1_up8ek")]
 position = Vector2(118, 13)
+dialogue_label = NodePath("../RichTextLabel")
+table_area = NodePath("../TableArea")
+bed_area = NodePath("../BedArea")
+next_scene = SubResource("PackedScene_3ty5n")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -4373,7 +4386,7 @@ tile_set = SubResource("TileSet_xk4lf")
 [node name="TopGround" type="TileMapLayer" parent="TileMap"]
 z_index = -5
 use_parent_material = true
-tile_map_data = PackedByteArray("AAD8//v/DAAQAAcAAAD8//z/DAAQAAgAAAD9//v/DAARAAcAAAD9//z/DAARAAgAAAAEAPv/DAAUAAoAAAAEAPz/DAAUAAsAAAAEAP3/DAAUAAwAAAAFAPv/DAAVAAoAAAAFAPz/DAAVAAsAAAAFAP3/DAAVAAwAAAAGAPv/DAAWAAoAAAAGAPz/DAAWAAsAAAAGAP3/DAAWAAwAAAAHAPv/DAAXAAoAAAAHAPz/DAAXAAsAAAAHAP3/DAAXAAwAAAD///3/DAAeAAsAAAD///7/DAAYAAoAAAAAAP3/DAAfAAsAAAAAAP7/DAAaAAoAAAABAP3/DAAeAAsAAAABAP7/DAAbAAoAAAACAP3/DAAfAAsAAAACAP7/DAAdAAoAAAABAPv/DAASABAAAAABAPz/DAASABEAAAACAPv/DAATABAAAAACAPz/DAATABEAAAAIAPz/DAASAAoAAAAIAP3/DAASAAsAAAAIAP7/DAASAAwAAAAJAPz/DAATAAoAAAAJAP3/DAATAAsAAAAJAP7/DAATAAwAAAD///r/DAAUAAgAAAD///v/DAAUAAkAAAAAAPr/DAAVAAgAAAAAAPv/DAAVAAkAAAAKAPv/DAAWAA4AAAAKAPz/DAAWAA8AAAALAPv/DAAXAA4AAAALAPz/DAAXAA8AAAD5//z/DAAKABAAAAD5//3/DAAKABEAAAD5//7/DAAKABIAAAD5////DAAKABMAAAD5/wAADAAKABQAAAD6//z/DAALABAAAAD6//3/DAALABEAAAD6//7/DAALABIAAAD6////DAALABMAAAD6/wAADAALABQAAAD3//3/DAAeAAcAAAD3//7/DAAeAAgAAAD4//3/DAAfAAcAAAD4//7/DAAfAAgAAAD1//z/DAAQABAAAAD1//3/DAAQABEAAAD1//7/DAAQABIAAAD2//z/DAARABAAAAD2//3/DAARABEAAAD2//7/DAARABIAAAA=")
+tile_map_data = PackedByteArray("AAD8//v/DAAQAAcAAAD8//z/DAAQAAgAAAD9//v/DAARAAcAAAD9//z/DAARAAgAAAAEAPv/DAAUAAoAAAAEAPz/DAAUAAsAAAAEAP3/DAAUAAwAAAAFAPv/DAAVAAoAAAAFAPz/DAAVAAsAAAAFAP3/DAAVAAwAAAAGAPv/DAAWAAoAAAAGAPz/DAAWAAsAAAAGAP3/DAAWAAwAAAAHAPv/DAAXAAoAAAAHAPz/DAAXAAsAAAAHAP3/DAAXAAwAAAD///3/DAAeAAsAAAD///7/DAAYAAoAAAAAAP3/DAAfAAsAAAAAAP7/DAAaAAoAAAABAP3/DAAeAAsAAAABAP7/DAAbAAoAAAACAP3/DAAfAAsAAAACAP7/DAAdAAoAAAABAPv/DAASABAAAAABAPz/DAASABEAAAACAPv/DAATABAAAAACAPz/DAATABEAAAAIAPz/DAASAAoAAAAIAP3/DAASAAsAAAAIAP7/DAASAAwAAAAJAPz/DAATAAoAAAAJAP3/DAATAAsAAAAJAP7/DAATAAwAAAD///r/DAAUAAgAAAD///v/DAAUAAkAAAAAAPr/DAAVAAgAAAAAAPv/DAAVAAkAAAAKAPv/DAAWAA4AAAAKAPz/DAAWAA8AAAALAPv/DAAXAA4AAAALAPz/DAAXAA8AAAD5//z/DAAKABAAAAD5//3/DAAKABEAAAD5//7/DAAKABIAAAD5////DAAKABMAAAD5/wAADAAKABQAAAD6//z/DAALABAAAAD6//3/DAALABEAAAD6//7/DAALABIAAAD6////DAALABMAAAD6/wAADAALABQAAAD3//3/DAAeAAcAAAD3//7/DAAeAAgAAAD4//3/DAAfAAcAAAD4//7/DAAfAAgAAAD1//z/DAAQABAAAAD1//3/DAAQABEAAAD1//7/DAAQABIAAAD2//z/DAARABAAAAD2//3/DAARABEAAAD2//7/DAARABIAAAAMAP7/DAARAAEAAAAMAP//DAARAAEAAAAMAAAADAARAAEAAAAMAAEADAARAAEAAAAMAAIADAARAAEAAAAMAAMADAARAAEAAAAMAAQADAARAAIAAAD0//7/DAARAAEAAAD0////DAARAAEAAAD0/wAADAARAAEAAAD0/wEADAARAAEAAAD0/wIADAARAAEAAAD0/wMADAARAAEAAAD0/wQADAARAAEAAAD1/wQADAAPAAMAAAD2/wQADAAPAAMAAAD3/wQADAAPAAMAAAD4/wQADAAPAAMAAAD5/wQADAAPAAMAAAD6/wQADAAPAAMAAAD7/wQADAAPAAMAAAD8/wQADAAPAAMAAAD9/wQADAAPAAMAAAD+/wQADAAPAAMAAAD//wQADAAPAAMAAAAAAAQADAAPAAMAAAABAAQADAAPAAMAAAACAAQADAAPAAMAAAADAAQADAAPAAMAAAAEAAQADAAPAAMAAAAFAAQADAAPAAMAAAAGAAQADAAPAAMAAAAHAAQADAAPAAMAAAAIAAQADAAPAAMAAAAJAAQADAAPAAMAAAAKAAQADAAPAAMAAAALAAQADAAPAAMAAAA=")
 tile_set = SubResource("TileSet_xk4lf")
 
 [node name="HigherGround" type="TileMapLayer" parent="TileMap"]
@@ -4381,3 +4394,32 @@ z_index = -5
 use_parent_material = true
 tile_map_data = PackedByteArray("AAD8//v/DAAWAAcAAAD8//z/DAAWAAgAAAD9//v/DAAXAAcAAAD9//z/DAAXAAgAAAD///z/DAASABIAAAD///3/DAASABMAAAAAAPz/DAATABIAAAAAAP3/DAATABMAAAAAAP7/DAAYAAwAAAAAAP//DAAYAA0AAAABAP7/DAAZAAwAAAABAP//DAAZAA0AAAACAPz/DAAVABAAAAD4//z/DAAVABAAAAD3//z/DAAVABAAABD3//3/DAAVABEAABABAP3/DAAWABEAAAACAP3/DAAXABEAAAA=")
 tile_set = SubResource("TileSet_xk4lf")
+
+[node name="TableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TableArea"]
+position = Vector2(41, -31)
+shape = SubResource("RectangleShape2D_nxa8a")
+
+[node name="BedArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BedArea"]
+position = Vector2(-89, -12)
+shape = SubResource("RectangleShape2D_bskef")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = 12.0
+offset_right = 147.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/normal_font = ExtResource("11_nxa8a")
+theme_override_font_sizes/normal_font_size = 10
+bbcode_enabled = true
+tab_size = 2
