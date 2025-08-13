@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://cveapueihhmmh" path="res://pastedFiles/scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://ddjafs085wg3e" path="res://pastedFiles/assets/roomAssets/MCWalkingSprite.png" id="1_ydmeg"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
-radius = 6.0
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_ydmeg")
 region = Rect2(32, 128, 32, 32)
@@ -130,15 +127,18 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 6.0
+
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_g2els")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_g2els")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_oprun")
 animation = &"sideWalk"
 autoplay = "frontIdle"
-frame_progress = 0.737259
+frame_progress = 0.680562
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_g2els")
