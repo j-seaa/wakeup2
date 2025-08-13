@@ -4,7 +4,7 @@ const speed = 100
 var current_dir = "none"
 
 func _ready():
-	$AnimatedSprite2D.play("front_idle")
+	$AnimatedSprite2D.play("frontIdle")
 
 func _physics_process(delta):
 	player_movement(delta)
